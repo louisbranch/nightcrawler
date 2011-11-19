@@ -6,6 +6,7 @@
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
+    = render :partial => 'shared/ga'
   %body{:class => "#{@body_class}", :id => "#{@body_id}"}
   %div#wrapper
     %h1= link_to 'Gozando a Vida', root_path
