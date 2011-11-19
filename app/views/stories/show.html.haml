@@ -1,0 +1,6 @@
+%h2= @story.title
+%div#story_author= story_author(@story)
+= render :partial => 'story_categories', :locals => { :story => @story}
+%div#story_content
+  :markdown
+    #{@story.content}

@@ -1,0 +1,7 @@
+%h3 Categorias
+%ul#category_menu
+  - @categories.each do |category|
+    =link_to(category_path(category)) do
+      %li
+        = category.name
+        %span= category.stories.count

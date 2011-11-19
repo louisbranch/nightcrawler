@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %title= title
+    %meta{:name => 'description', :content => "#{@description}"}
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body{:class => "#{@body_class}", :id => "#{@body_id}"}
+  %div#wrapper
+    %h1= link_to 'Gozando a Vida', root_path
+    = render :partial => 'shared/flash_messages'
+    %div#left_column
+      = yield
+    %div#right_column
+      = render :partial => 'categories/categories_menu'
+    = render :partial => 'stories/disclaimer'

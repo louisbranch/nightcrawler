@@ -1,0 +1,3 @@
+%h2= @category.name
+= render @stories
+= will_paginate @stories, previous_label: h("<"), next_label: h(">"), :param_name => :pagina

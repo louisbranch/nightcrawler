@@ -1,0 +1,7 @@
+%div.story_item
+  %h3= link_to story.title, story_path(story)
+  %div.story_author= story_author(story)
+  %div.story_content= story.content.truncate(180)
+  = render :partial => 'stories/story_categories', :locals => { :story => story }
+  -#%p= "Votos: #{story.likes}"
+  -#%p= "escrito em: #{time_ago_in_words(story.created_at)}"
