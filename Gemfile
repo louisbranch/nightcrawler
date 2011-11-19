@@ -23,3 +23,8 @@ gem 'nokogiri'
 gem 'unicode_utils'
 gem 'will_paginate'
 gem 'tabs_on_rails'
+
+group :production do
+  gem 'therubyracer-heroku'
+  gem 'pg'
+end
