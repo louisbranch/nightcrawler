@@ -1,0 +1,13 @@
+= form_for @source do |f|
+  = f.label :type_id, 'Type'
+  = f.text_field :type_id
+  = f.label :title, 'Title'
+  = f.text_field :title
+  = f.label :url, 'URL'
+  = f.text_field :url
+  = f.label :parse_url, 'Parse URL'
+  = f.text_field :parse_url
+  = f.label :crawl_rate, 'Crawl Rate'
+  = f.text_field :crawl_rate
+  = f.submit
+  

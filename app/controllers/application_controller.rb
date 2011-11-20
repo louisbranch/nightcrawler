@@ -12,4 +12,15 @@ class ApplicationController < ActionController::Base
     @categories = Category.all
   end
   
+  protected
+
+  def authenticate
+    authenticate_or_request_with_http_basic do |username, password|
+      @config ||= if ENV['USER_NAME'] && ENV['USER_PASSWORD']
+        username == ENV['USER_NAME'] && password == ENV['USER_PASSWORD']
+      else
+        username == "" && password == ""
+      end
+    end
+  end
 end

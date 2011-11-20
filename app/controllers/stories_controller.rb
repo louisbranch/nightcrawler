@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class StoriesController < ApplicationController
-    before_filter :authenticate, :except => [:index, :show]
+  before_filter :authenticate, :except => [:index, :show]
   
   def index
     @title = 'Os melhores Contos Eróticos'
@@ -10,7 +10,7 @@ class StoriesController < ApplicationController
   
   def show
     @story = Story.find(params[:id])
-    @title = "#{@story.title} / #{@story.tags.first.category.name}"
+    @title = "#{@story.title} / #{@story.categories.first.name unless @story.categories.empty?}"
     @description = @story.content.truncate(100).gsub(/\n\n/, ' ')
   end
   
@@ -39,17 +39,4 @@ class StoriesController < ApplicationController
     end
     redirect_to stories_path
   end
-
-  protected
-
-  def authenticate
-    authenticate_or_request_with_http_basic do |username, password|
-      @config ||= if ENV['USER_NAME'] && ENV['USER_PASSWORD']
-        username == ENV['USER_NAME'] && password == ENV['USER_PASSWORD']
-      else
-        username == "" && password == ""
-      end
-    end
-  end
-  
 end
