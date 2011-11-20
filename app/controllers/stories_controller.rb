@@ -30,7 +30,7 @@ class StoriesController < ApplicationController
     end
   end
   
-  def delete
+  def destroy
     @story = Story.find(params[:id])
     if @story.destroy
       flash[:notice] = 'Conto excluído!'
