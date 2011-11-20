@@ -1,0 +1,10 @@
+= form_for @story do |f|
+  = f.label :title, 'Título:'
+  = f.text_field :title
+  = f.label :content, 'Texto:'
+  = f.text_area :content, :cols => '60'
+  = f.submit 'Atualizar'
+  = f.fields_for :tags do |builder|
+    - @categories.each do |category|
+      = label_tag category.id, category.name
+      = check_box_tag "#{category.id}", category.id, @story.categories.include?(category), :name => 'story[tag_ids][]'

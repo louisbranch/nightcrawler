@@ -7,7 +7,7 @@ class Story < ActiveRecord::Base
   belongs_to :source
   belongs_to :author
   has_many :tags, :as => :taggable, :dependent => :destroy
-  has_many :tag_names, :through => :tags
+  has_many :categories, :through => :tags
   
   validates :title,  :presence => true
   validates :source_id,  :presence => true
