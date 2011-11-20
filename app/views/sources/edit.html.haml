@@ -1,2 +1,3 @@
 %h2 Editar Fonte
 = render :partial => 'form'
+= link_to 'Delete', story_path(@story), :method => :delete, :confirm => 'Are you sure?'
