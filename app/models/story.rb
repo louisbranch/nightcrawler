@@ -40,7 +40,7 @@ class Story < ActiveRecord::Base
   end
   
   def fake_likes
-    self.likes = rand(0-500)
+    self.likes = rand(0-501)
   end
   
   def capitalize_data
