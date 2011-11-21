@@ -41,7 +41,8 @@ class StoryParser
   
   def fetch_title
     str = doc.xpath('/html/body/center/table[3]/tr/td/strong').text
-    UnicodeUtils.downcase(str)
+    encoded = UnicodeUtils.downcase(str)
+    enconded.gsub('£', '').gsub('ã§','ç')
   end
   
   def fetch_content
@@ -50,7 +51,7 @@ class StoryParser
     vote = UnicodeUtils.downcase(doc.xpath('/html/body/center/table[3]/tr/td/form').text)
     content_cleaned = content.sub(fetch_title, '').sub(merchan, '').sub(vote, '')
     content_striped = content_cleaned.strip.each_line.reject{|x| x.strip == ""}.join
-    content_paragraphed = content_striped.gsub(/\n/,"\n\n").gsub('  ', '').gsub('£', '').gsub('ã§','ç')
+    content_paragraphed = content_striped.gsub(/\n/,"\n\n").gsub('  ', '')
   end
 
   def fetch_email
