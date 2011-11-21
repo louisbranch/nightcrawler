@@ -42,7 +42,7 @@ class StoryParser
   def fetch_title
     str = doc.xpath('/html/body/center/table[3]/tr/td/strong').text
     encoded = UnicodeUtils.downcase(str)
-    enconded.gsub('£', '').gsub('ã§','ç')
+    encoded.gsub('£', '').gsub('ã§','ç')
   end
   
   def fetch_content

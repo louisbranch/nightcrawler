@@ -23,6 +23,18 @@ class Story < ActiveRecord::Base
     self.save!
   end
   
+  def add_tag(category)
+    unless tags.find_by_category_id(category)
+      tags.create(:category => category)
+    end
+  end
+  
+  def remove_tag(category)
+    if tags.find_by_category_id(category)
+      tags.find_by_category_id(category).destroy
+    end
+  end
+   
   protected
   
   def create_category(category)
