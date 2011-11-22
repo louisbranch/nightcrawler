@@ -3,7 +3,9 @@
   = f.text_field :title
   = f.label :content, 'Texto:'
   = f.text_area :content, :cols => '60'
+  %fieldset#story_categories
+    %legend Categorias
+    - @categories.each do |category|
+      = check_box_tag "category_#{category.id}", category.id, @story.categories.include?(category), :name => 'category_ids[]'
+      = label_tag "category_#{category.id}", category.name
   = f.submit 'Atualizar'
-  - @categories.each do |category|
-    = label_tag "category_#{category.id}", category.name
-    = check_box_tag "category_#{category.id}", category.id, @story.categories.include?(category), :name => 'category_ids[]'
