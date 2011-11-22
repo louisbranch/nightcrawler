@@ -22,7 +22,8 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     @story.update_attributes(params[:story])
     if @story.save
-      flash[:notice] = 'Conto atualizado!'
+      @story.assign_tags(params[:category_ids])
+      flash[:notice] = "Conto atualizado!"
       redirect_to story_path(@story)
     else
       flash[:notice] = 'Ocorreu um erro ao atualizar o conto!'

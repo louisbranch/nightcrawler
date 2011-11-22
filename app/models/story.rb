@@ -23,15 +23,21 @@ class Story < ActiveRecord::Base
     self.save!
   end
   
-  def add_tag(category)
-    unless tags.find_by_category_id(category)
-      tags.create(:category => category)
-    end
-  end
-  
-  def remove_tag(category)
-    if tags.find_by_category_id(category)
-      tags.find_by_category_id(category).destroy
+  def assign_tags(new_categories)
+    new_categories ||= []
+    new_categories = new_categories.map(&:to_i)
+    current_categories = self.categories.map(&:id)
+    unless current_categories == new_categories
+      excluded_categories = current_categories - new_categories
+      excluded_categories.each do |excluded|
+        self.tags.find_by_category_id(excluded).destroy
+      end
+      new_categories.each do |neo|
+        cat = Category.find(neo)
+        unless self.categories.include?(cat)
+          self.tags.create(:category => cat)
+        end
+      end
     end
   end
    
