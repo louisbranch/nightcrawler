@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class StoriesController < ApplicationController
-  before_filter :authenticate, :except => [:index, :show]
+  before_filter :authenticate, :only => [:edit, :update, :destroy]
   
   def index
     @title = 'Os melhores Contos Eróticos'
@@ -14,6 +14,23 @@ class StoriesController < ApplicationController
     @description = @story.content.truncate(120).gsub(/\n\n/, ' ')
   end
   
+  def new
+    @story = Story.new
+  end
+  
+  def create
+    @story = Story.new(params[:story])
+    if @story.save
+      @story.assign_author(params[:author])
+      @story.assign_tags(params[:category_ids])
+      flash[:notice] = "Conto criado!"
+      redirect_to story_path(@story)
+    else
+      flash[:error] = 'Ocorreu um erro ao criar o conto!'
+      redirect_to stories_path
+    end
+  end
+  
   def edit
     @story = Story.find(params[:id])
   end
@@ -22,11 +39,12 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     @story.update_attributes(params[:story])
     if @story.save
+      @story.assign_author(params[:author])
       @story.assign_tags(params[:category_ids])
       flash[:notice] = "Conto atualizado!"
       redirect_to story_path(@story)
     else
-      flash[:notice] = 'Ocorreu um erro ao atualizar o conto!'
+      flash[:error] = 'Ocorreu um erro ao atualizar o conto!'
       redirect_to edit_story_path(@story)
     end
   end
@@ -36,7 +54,7 @@ class StoriesController < ApplicationController
     if @story.destroy
       flash[:notice] = 'Conto excluído!'
     else
-      flash[:alert] = 'Ocorreu um erro ao excluir o conto!'
+      flash[:error] = 'Ocorreu um erro ao excluir o conto!'
     end
     redirect_to stories_path
   end

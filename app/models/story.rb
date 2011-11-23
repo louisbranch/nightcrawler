@@ -10,7 +10,6 @@ class Story < ActiveRecord::Base
   has_many :categories, :through => :tags
   
   validates :title,  :presence => true
-  validates :source_id,  :presence => true
   validates :content,  :presence => true
   
   def create_by_fetch(hash)
@@ -39,6 +38,13 @@ class Story < ActiveRecord::Base
         end
       end
     end
+  end
+  
+  def assign_author(author)
+    unless author["email"].blank?
+      create_author(author["email"],author["name"])
+    end
+    self.save!
   end
    
   protected

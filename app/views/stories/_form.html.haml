@@ -3,9 +3,15 @@
   = f.text_field :title
   = f.label :content, 'Texto:'
   = f.text_area :content, :cols => '60'
+  %fieldset#story_author
+    %legend Autor
+    = label_tag 'author[email]', 'Email:'
+    = text_field_tag 'author[email]', "#{@story.author.email unless @story.author.nil?}"
+    = label_tag 'author[name]', 'Nome:'
+    = text_field_tag 'author[name]', "#{@story.author.name unless @story.author.nil?}"
   %fieldset#story_categories
     %legend Categorias
     - @categories.each do |category|
       = check_box_tag "category_#{category.id}", category.id, @story.categories.include?(category), :name => 'category_ids[]'
       = label_tag "category_#{category.id}", category.name
-  = f.submit 'Atualizar'
+  = f.submit 'Salvar'
