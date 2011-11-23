@@ -10,8 +10,8 @@ class StoriesController < ApplicationController
   
   def show
     @story = Story.find(params[:id])
-    @title = "#{@story.title} / #{@story.categories.first.name unless @story.categories.empty?}"
-    @description = @story.content.truncate(100).gsub(/\n\n/, ' ')
+    @title = "#{@story.title} / #{@story.categories.map(&:name).join(" / ") unless @story.categories.empty?}"
+    @description = @story.content.truncate(120).gsub(/\n\n/, ' ')
   end
   
   def edit

@@ -3,5 +3,5 @@
   %div.story_author= story_author(story)
   %div.story_content= story.content.truncate(180)
   = render :partial => 'stories/story_categories', :locals => { :story => story } unless story.categories.empty?
+  %div.story_timestamp= "Enviado há #{time_ago_in_words(story.created_at)} atrás"
   -#%p= "Votos: #{story.likes}"
-  -#%p= "escrito em: #{time_ago_in_words(story.created_at)}"

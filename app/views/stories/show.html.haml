@@ -1,5 +1,6 @@
 %h2= @story.title
 %div#story_author= story_author(@story)
+%div#story_timestamp= "Enviado há #{time_ago_in_words(@story.created_at)} atrás"
 = render :partial => 'story_categories', :locals => { :story => @story}
 %div#story_content
   :markdown
