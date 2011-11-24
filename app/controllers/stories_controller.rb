@@ -5,7 +5,7 @@ class StoriesController < ApplicationController
   def index
     @title = 'Os melhores Contos Eróticos'
     @description = "Leia as histórias mais picantes sobre #{@categories.map(&:name).join(", ")}"
-    @stories = Story.page(params[:pagina]).order('created_at DESC').per_page(10)
+    @stories = Story.page(params[:pagina]).per_page(10)
   end
   
   def show
@@ -15,6 +15,7 @@ class StoriesController < ApplicationController
   end
   
   def new
+    @title = 'Envie seu Conto Erótico'
     @story = Story.new
   end
   

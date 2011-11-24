@@ -12,6 +12,8 @@ class Story < ActiveRecord::Base
   validates :title,  :presence => true
   validates :content,  :presence => true
   
+  default_scope order('created_at DESC')
+  
   def create_by_fetch(hash)
     self.title = hash[:title]
     self.source_id = hash[:source_id]
