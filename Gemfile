@@ -24,6 +24,10 @@ gem 'unicode_utils'
 gem 'will_paginate'
 gem 'tabs_on_rails'
 
+group :development do
+  gem 'sitemap_generator'
+end
+
 group :production do
   gem 'therubyracer-heroku'
   gem 'pg'
