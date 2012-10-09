@@ -23,6 +23,7 @@ gem 'nokogiri'
 gem 'unicode_utils'
 gem 'will_paginate'
 gem 'tabs_on_rails'
+gem 'httparty'
 
 group :development do
   gem 'sitemap_generator'
